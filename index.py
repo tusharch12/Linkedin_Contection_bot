@@ -45,26 +45,28 @@ def build_message(employee):
 
     return message if len(message) <= 300 else ""
 
-def get_button_elements():
+def get_button_elements(driver):
     print('get_button 1.1')
-    buttons = WebDriverWait(driver, 10).until(
-        EC.presence_of_all_elements_located(
-            (By.CLASS_NAME, 'artdeco-button__text')
-        )
+    button= driver.find_elements(By.TAG_NAME,'li')
+    print(button)
+    # buttons = WebDriverWait(driver, 10).until(
+    #     EC.presence_of_all_elements_located(
+    #         (By.CLASS_NAME, 'artdeco-button__text')
+    #     )        
 
-    )
-    print("click kar rha h ")
-    time.sleep(2)
-    buttons[0].click()
-    print('get_button 1.2')
-    return [
-        buttons
-        # for button in buttons
-        # if any(
-        #     keyword.lower() in button.find_element(by= By.XPATH,value="..").text.lower()
-        #     for keyword in POSITION_KEYWORDS
-        # )
-    ]
+    # )
+    # print("click kar rha h ")
+    # time.sleep(2)
+    # buttons[0].click()
+    # print('get_button 1.2')
+    # return [
+    #     buttons
+    #     # for button in buttons
+    #     # if any(
+    #     #     keyword.lower() in button.find_element(by= By.XPATH,value="..").text.lower()
+    #     #     for keyword in POSITION_KEYWORDS
+    #     # )
+    # ]
     
 
 def fill_message_and_connect():
@@ -120,7 +122,11 @@ driver.get(f"https://www.linkedin.com/company/{COMPANY_NAME}/people/")
 
 try:
     connections = 0
-    totalButton = get_connect_buttons()
+    print('get_button 1.1')
+    totalButton= driver.find_element(By.TAG_NAME,'li').click()
+    print(totalButton)
+    # totalButton = get_button_elements(driver)
+    # get_connect_buttons()
     print("1.2")
     print(totalButton.count)
     for button in totalButton:
